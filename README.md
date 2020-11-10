@@ -1,1 +1,2 @@
-# CS-545-WeatherApp
+# Weather-Pro
+Weather Pro - a weather app built on the dark sky api
