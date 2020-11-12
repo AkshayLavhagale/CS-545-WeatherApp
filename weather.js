@@ -18,36 +18,40 @@ const iconValue = {
 function fetchWeatherReport(apiKey, latitude, longitude) {
 
     //to avoid the cors issue you need to run through a proxy or make the call server side.
-    var DsProxyLink = `https://cors-anywhere.herokuapp.com/`;
-    var DsApiLink = `${DsProxyLink}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?exclude=minutely,alerts,flags`;
-
-    fetch(DsApiLink)
+    // var DsProxyLink = `https://cors-anywhere.herokuapp.com/`;
+    // var DsApiLink = `${DsProxyLink}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?exclude=minutely,alerts,flags`;
+    // var weatherapi = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}units=imperial&appid=${apiKey}`)
         .then(response => {
             return response.json()
         })
         .then(data => {
             // Work with JSON data here
+            console.log(data)
             var resultsHTML = "";
             var tableHTML = "";
-            var summary = data.currently.summary;
-            var temperature = data.currently.temperature;
-            var icon = data.currently.icon;
-            var precipProbability = data.currently.precipProbability;
-            var humidity = data.currently.humidity;
-            var windSpeed = data.currently.windSpeed
-            var ts = new Date(data.currently.time * 1000);
+            // var summary = data.weather.main;
+            // data.main.temp = ((data.main.temp-273.15)*1.8)+32
+            var temperature = data.main.temp;
+            var icon = data.weather.icon;
+            // var precipProbability = data.currently.precipProbability;
+            var humidity = data.main.humidity;
+            var windSpeed = data.wind.speed
+            var ts = new Date(data.dt * 1000);
             var forecastDate = `${wDay[ts.getDay()]} ${wMonth[ts.getMonth()]} ${ts.getDate()}`
+            var city = data.name
 
 
             //Set values for the current conditions
             // document.getElementById("location").innerHTML = name;
             document.getElementById("dayTime").innerHTML = forecastDate;
-            document.getElementById("summary").innerHTML = summary;
+            // document.getElementById("summary").innerHTML = summary;
             document.getElementById("currentTemp").innerHTML = `${Math.round(temperature)}&deg`;
             document.getElementById("weatherIcon").src = getICON(icon);
             document.getElementById("perciptation").innerHTML = `Precipitation ${precipProbability*100}%`;
             document.getElementById("humidty").innerHTML = `Humidity ${Math.round(humidity*100)}%`;
             document.getElementById("wind").innerHTML = `Winds ${Math.round(windSpeed)} mph`;
+
 
             //render the forcasts tabs
             document.getElementById("dailyForecast").innerHTML = renderWeeklyForecast(data.daily);
@@ -61,18 +65,18 @@ function fetchWeatherReport(apiKey, latitude, longitude) {
 
 function fetchLocation(apiKey, latitude, longitude) {
 
-    //you don't need a proxy but you need secure your key in the google developer console. 
-    var googleApiLink = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
-
-    fetch(googleApiLink)
+    //you don't need a proxy but you need secure your key in the google developer console.
+    // var googleApiLink = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+    // console.log(googleApiLink)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
         .then(response => {
             return response.json()
         })
         .then(data => {
             // Work with JSON data here
-
+            console.log(data)
             //Set values for the location we picked the 4 object in the results becuase show the approximate address
-            document.getElementById("location").innerHTML = data.results[4].formatted_address;
+            document.getElementById("location").innerHTML = data.name;
         })
         .catch(err => {
             // Do something for an error here
@@ -193,9 +197,9 @@ function initGeolocation() {
 function success(position) {
 
     //ADD your keys here. My keys are located in a key.js file but are not included in the sample code for security reasons.
-    //var dsKey = "";
-    //var googleApiKey= "";
-    fetchLocation(googleApiKey, position.coords.latitude, position.coords.longitude)
+    var dsKey = "45c1fbcec6657b010bf10790f3277dfb";
+    // var googleApiKey= "";
+    fetchLocation(dsKey, position.coords.latitude, position.coords.longitude)
     fetchWeatherReport(dsKey, position.coords.latitude, position.coords.longitude)
 }
 
@@ -204,3 +208,24 @@ function fail() {
     //You could default to your favorite city like Kernersville, NC the home of Coder Foundry!
     alert("Sorry, your browser does not support geolocation services.");
 }
+
+
+// const settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://community-open-weather-map.p.rapidapi.com/weather?q=London%2Cuk&lat=0&lon=0&callback=test&id=2172797&lang=null&units=%22metric%22%20or%20%22imperial%22&mode=xml%2C%20html",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-key": "0c2cb3a7b3msh8087c9c5d055d4ep127e47jsn215f689675a4",
+// 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com"
+// 	}
+// };
+//
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+// });
+//
+// function fhwllo() {
+//     var hi = "hi";
+//     console.log("Hello, World!!")
+// }

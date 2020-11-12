@@ -49,6 +49,7 @@
   </head>
 
   <body onload="initGeolocation();">
+  <script>initGeolocation()</script>
     <div class="wpBackground">
       <div class="d-flex flex-column h-100">
         <div id="wpMain" class="container">
@@ -59,19 +60,23 @@
             <div id="wpCurrent" class="col">
               <div class="row">
                 <div id="wpTemp" class="col-sm">
-                  <div id="location" class="row col d-md-inline-block">
-                    Hoboken, NJ
-                  </div>
-                  <div class="row col d-md-inline-block" id="dayTime">
-                    Monday, 12:00PM
-                  </div>
-                  <div class="row col d-md-inline-block" id="summary">
-                    Mostly Sunny
-                  </div>
-                  <div class="row col d-md-inline-block" id="currentTemp">
-                    90&deg;
-                  </div>
+<!--                  <div id="location" class="row col d-md-inline-block">-->
+<!--                    Hoboken, NJ-->
+<!--                  </div>-->
+<!--                  <div class="row col d-md-inline-block" id="dayTime">-->
+<!--                    Monday, 8:00PM-->
+<!--                  </div>-->
+<!--                  <div class="row col d-md-inline-block" id="summary">-->
+<!--                    Mostly Sunny-->
+<!--                  </div>-->
+<!--                  <div class="row col d-md-inline-block" id="currentTemp">-->
+<!--                    90&deg;-->
+<!--                  </div>-->
+                    <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
+                    <div class="climacell-widget transparent-bg" data-apikey="cPpDlM2hkJK1nJbfRXfW0Awg64k6E5vm" data-type="nowcast" data-location-name="Jersey City, NJ 07307, USA" data-location-lon="-71.04974909999999" data-location-lat="42.3502782" data-size-mode="large" data-font-color="#000" data-background-color="#fff" data-font-family="verdana" data-weather-params="temp:F,precipitation:mm/hr,wind_speed:mph,humidity:%,cloud_cover:%" data-precipitation-timeline="true" data-allow-users-enter-address="true" ></div>
+
                 </div>
+
                 <div class="col-sm">
                   <img
                     id="weatherIcon"
@@ -79,21 +84,26 @@
                     src="images/MostlySunny.png"
                   />
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
           <div class="row">
             <div id="wpConditions" class="col-md">
               <div class="row">
-                <div id="perciptation" class="col-md">Percepitation 20%</div>
+                <div id="perciptation" class="col-md">Percepitation 80%</div>
               </div>
               <div class="row">
-                <div id="humidty" class="col-md">Humidity 95%</div>
+                <div id="humidty" class="col-md">Humidity 68%</div>
               </div>
               <div class="row">
-                <div id="wind" class="col-md">Wind 14mph</div>
+                <div id="wind" class="col-md">Wind 11mph</div>
               </div>
             </div>
+
             <div id="wpForecast" class="col-md">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs" id="forecastTab">
@@ -108,7 +118,6 @@
                   >
                 </li>
               </ul>
-
               <!-- Tab panes -->
               <div class="tab-content">
                 <div class="tab-pane container active" id="daily">
