@@ -13,7 +13,7 @@ const iconValue = {
     PARTLY_CLOUDY_DAY: 'partly-cloudy-day',
     PARTLY_CLOUDY_NIGHT: 'partly-cloudy-night'
 }
-
+let summary = "";
 // fetch the weather from the dark ski api
 function fetchWeatherReport(apiKey, latitude, longitude) {
 
@@ -21,7 +21,7 @@ function fetchWeatherReport(apiKey, latitude, longitude) {
     // var DsProxyLink = `https://cors-anywhere.herokuapp.com/`;
     // var DsApiLink = `${DsProxyLink}https://api.darksky.net/forecast/${apiKey}/${latitude},${longitude}?exclude=minutely,alerts,flags`;
     // var weatherapi = `api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}units=imperial&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`)
         .then(response => {
             return response.json()
         })
@@ -30,7 +30,7 @@ function fetchWeatherReport(apiKey, latitude, longitude) {
             console.log(data)
             var resultsHTML = "";
             var tableHTML = "";
-            // var summary = data.weather.main;
+            summary = data.weather[0].main;
             // data.main.temp = ((data.main.temp-273.15)*1.8)+32
             var temperature = data.main.temp;
             var icon = data.weather.icon;
@@ -45,7 +45,7 @@ function fetchWeatherReport(apiKey, latitude, longitude) {
             //Set values for the current conditions
             // document.getElementById("location").innerHTML = name;
             document.getElementById("dayTime").innerHTML = forecastDate;
-            // document.getElementById("summary").innerHTML = summary;
+            document.getElementById("summary").innerHTML = summary;
             document.getElementById("currentTemp").innerHTML = `${Math.round(temperature)}&deg`;
             document.getElementById("weatherIcon").src = getICON(icon);
             document.getElementById("perciptation").innerHTML = `Precipitation ${precipProbability*100}%`;
@@ -198,7 +198,7 @@ function success(position) {
 
     //ADD your keys here. My keys are located in a key.js file but are not included in the sample code for security reasons.
     var dsKey = "45c1fbcec6657b010bf10790f3277dfb";
-    // var googleApiKey= "";
+    // var googleApiKey= "AIzaSyBNucY7rjJ61ZN3RwX-U3I8GM55hgxFU80";
     fetchLocation(dsKey, position.coords.latitude, position.coords.longitude)
     fetchWeatherReport(dsKey, position.coords.latitude, position.coords.longitude)
 }
@@ -229,3 +229,7 @@ function fail() {
 //     var hi = "hi";
 //     console.log("Hello, World!!")
 // }
+
+function speech(){
+    responsiveVoice.speak(`The weather today is ${summary}`);
+}
