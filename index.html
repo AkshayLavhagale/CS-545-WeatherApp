@@ -3,6 +3,10 @@
   <head>
     <title>WeatherApp</title>
     <!-- Required meta tags -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -49,7 +53,6 @@
   </head>
 
   <body onload="initGeolocation();">
-
     <div class="wpBackground">
       <div class="d-flex flex-column h-100">
         <div id="wpMain" class="container">
@@ -72,27 +75,33 @@
                   <div class="row col d-md-inline-block" id="currentTemp">
                     90&deg;
                   </div>
-                  <div>
-                    <button onclick="speech()" type="button" value="Play">Listen to Weather Update!</button>
+                  <div class="row col d-md-inline-block" id="weatherDataUpdate">
+                    <button onclick="speech()" type="button" value="Play">
+                      Listen to Weather Update!
+                    </button>
                   </div>
-
                 </div>
-
-<!--                <div class="col-sm">-->
-<!--                  <img-->
-<!--                    id="weatherIcon"-->
-<!--                    class="img-fluid"-->
-<!--                    src="images/MostlySunny.png"-->
-<!--                  />-->
-<!--                </div>-->
-
               </div>
-                <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
-                    <div class="climacell-widget transparent-bg" data-apikey="cPpDlM2hkJK1nJbfRXfW0Awg64k6E5vm" data-type="nowcast" data-location-name="Jersey City, NJ 07307, USA" data-location-lon="-71.04974909999999" data-location-lat="42.3502782" data-size-mode="large" data-font-color="#000" data-background-color="#fff" data-font-family="verdana" data-weather-params="temp:F,precipitation:mm/hr,wind_speed:mph,humidity:%,cloud_cover:%" data-precipitation-timeline="true" data-allow-users-enter-address="true" ></div>
-
-
+              <script
+                type="text/javascript"
+                src="https://widgets-viewer.climacell.co/v1/sdk.js"
+              ></script>
+              <div
+                class="climacell-widget transparent-bg"
+                data-apikey="cPpDlM2hkJK1nJbfRXfW0Awg64k6E5vm"
+                data-type="nowcast"
+                data-location-name="Jersey City, NJ 07307, USA"
+                data-location-lon="-71.04974909999999"
+                data-location-lat="42.3502782"
+                data-size-mode="large"
+                data-font-color="#000"
+                data-background-color="#fff"
+                data-font-family="verdana"
+                data-weather-params="temp:F,precipitation:mm/hr,wind_speed:mph,humidity:%,cloud_cover:%"
+                data-precipitation-timeline="true"
+                data-allow-users-enter-address="true"
+              ></div>
             </div>
-
           </div>
 
           <div class="row">
@@ -163,10 +172,45 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-  <!--  These scripts are for speech to text-->
-     <script src="https://code.responsivevoice.org/responsivevoice.js?key=AavQenOY"></script>
-<!--  <script> setTimeout(responsiveVoice.speak("Welcome to the Weather App"),1500);</script>-->
-
-
+    <!--  These scripts are for speech to text-->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=AavQenOY"></script>
+    <!--  <script> setTimeout(responsiveVoice.speak("Welcome to the Weather App"),1500);</script>-->
+    <div class="container">
+      <h1 class="text-center mt-2">COVID-19 Live Data</h1>
+      <!-- <br><br> -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Total Cases</th>
+            <th>Total Deaths</th>
+            <th>Total Recovered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="data"></tr>
+        </tbody>
+      </table>
+    </div>
   </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      init();
+
+      function init() {
+        var url = "https://api.covid19api.com/summary";
+        var data = "";
+        $.get(url, function (data) {
+          console.log(data.Global);
+          data = `
+          <td>${data.Global.TotalConfirmed}</td>
+          <td>${data.Global.TotalDeaths}</td>
+          <td>${data.Global.TotalRecovered}</td>
+          `;
+
+          $("#data").html(data);
+        });
+      }
+    });
+  </script>
 </html>
