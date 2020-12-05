@@ -1,0 +1,37 @@
+/*!
+ * Project_Name: Weather
+
+ * Url: http://www.themezy.com
+ */
+
+/*=========================================== 
+ * Importing CSS Libraries
+ *===========================================*/
+ @import 	"libs/settings",
+ 			"libs/mixins",
+ 			"libs/normalize",
+ 			"libs/global",
+ 			"libs/components",
+
+ 			// importing bootstrap grid framework
+ 			"libs/bootstrap-grid/settings",
+ 			"libs/bootstrap-grid/mixins",
+ 			"libs/bootstrap-grid/grid",
+
+			// importing layout styles
+ 			"layout/header",
+ 			"layout/content",
+ 			"layout/sidebar",
+ 			"layout/footer";
+#inline{
+    display: inline;
+}
+
+/* Styles */
+
+body {
+  background: #dce2e5;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 11px;
+}

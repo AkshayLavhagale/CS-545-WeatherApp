@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Covid-19 Updates</title>
+
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">
+		
+		<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+
+		<![endif]-->
+		<script src="https://code.responsivevoice.org/responsivevoice.js?key=AavQenOY"></script>
+		<script src="js/covid.js"></script>
+
+	</head>
+
+
+	<body>
+		
+<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="images/logo.png" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">Weather App</h1>
+
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+<!--							<li class="menu-item"><a href="news.html">News</a></li>-->
+							<li class="menu-item"><a href="live-cameras.html">Covid-19 Updates</a></li>
+							<li class="menu-item"><a onclick="openForm()" data-toggle="modal" data-target="#myModal" class="btn">Rate Us</a></li>
+<!--							<li class="menu-item"><a href="photos.html">Photos</a></li>-->
+<!--							<li class="menu-item"><a href="contact.html">Contact</a></li>-->
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+
+
+					<!-- Modal -->
+						<div hidden class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+
+							  </div>
+							  <div class="modal-body">
+
+
+
+							   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfca3gu2_nVY6EGtC-ww66K3Qow__jja3me_gNleFVHHlHLeA/viewform?embedded=true" width="640" height="2535" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+								  <button style="alignment: center" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="closeForm()">Close</span></button>
+
+							  </div>
+
+							</div>
+						  </div>
+						</div>
+
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+			<main class="main-content">
+				<div class="container">
+					<div class="breadcrumb">
+						<a href="index.html">Home</a>
+						<span>Covid-19 Updates</span>
+					</div>
+				</div>
+
+				<br>
+
+				<div>
+					<h2 style="margin-left: 50px">Number of Covid-19 Testing performed in different Countries till Date:</h2>
+					<br>
+					<div>
+						<iframe src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand" style="width: 70%; height: 600px; border: 1px none;margin-left: 200px"></iframe>
+					</div>
+					<br>
+					<br>
+					<h2 style="margin-left: 50px">Confirmed Covid-19 Cases (Countrywise)</h2>
+					<br>
+					<div>
+						<iframe src="https://ourworldindata.org/grapher/total-cases-covid-19?tab=map" width="70%" height="600px" style="margin-left: 200px"></iframe>
+					</div>
+				</div>
+
+
+				<br>
+				<br>
+			</main> <!-- .main-content -->
+
+			<footer class="site-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+							<form action="#" class="subscribe-form">
+								<input type="text" placeholder="Enter your Feedback here, We're actively trying to improve our site...">
+								<input type="submit" value="Send Feedback">
+							</form>
+						</div>
+					</div>
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+		
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			function openForm() {
+			  document.getElementById("myModal").style.display = "block";
+			}
+
+			function closeForm() {
+				document.getElementById("myModal").style.display = "none";
+			}
+
+		</script>
+		
+	</body>
+
+</html>
