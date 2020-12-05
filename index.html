@@ -1,216 +1,543 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>WeatherApp</title>
-    <!-- Required meta tags -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://use.typekit.net/uwe4jcq.css" />
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+		
+		<title>Compass Starter by Ariona, Rian</title>
 
-    <!--Fav icon-->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/images/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/images/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/images/site.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="/images/safari-pinned-tab.svg"
-      color="#5bbad5"
-    />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
-    <!--End Fav icon-->
-    <script src="weather.js"></script>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-  </head>
+		<!-- Loading third party fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
+		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--		<link rel="script" href="bootstrap.bundle.min.js / bootstrap.bundle.js">-->
 
-  <body onload="initGeolocation();">
-    <div class="wpBackground">
-      <div class="d-flex flex-column h-100">
-        <div id="wpMain" class="container">
-          <div class="row">
-            <div id="wpTitle" class="col text-center">WeatherApp</div>
-          </div>
-          <div class="row">
-            <div id="wpCurrent" class="col">
-              <div class="row">
-                <div id="wpTemp" class="col-sm">
-                  <div id="location" class="row col d-md-inline-block">
-                    Hoboken, NJ
-                  </div>
-                  <div class="row col d-md-inline-block" id="dayTime">
-                    Monday, 8:00PM
-                  </div>
-                  <div class="row col d-md-inline-block" id="summary">
-                    Mostly Sunny
-                  </div>
-                  <div class="row col d-md-inline-block" id="currentTemp">
-                    90&deg;
-                  </div>
-                  <div class="row col d-md-inline-block" id="weatherDataUpdate">
-                    <button onclick="speech()" type="button" value="Play">
-                      Listen to Weather Update!
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <script
-                type="text/javascript"
-                src="https://widgets-viewer.climacell.co/v1/sdk.js"
-              ></script>
-              <div
-                class="climacell-widget transparent-bg"
-                data-apikey="cPpDlM2hkJK1nJbfRXfW0Awg64k6E5vm"
-                data-type="nowcast"
-                data-location-name="Jersey City, NJ 07307, USA"
-                data-location-lon="-71.04974909999999"
-                data-location-lat="42.3502782"
-                data-size-mode="large"
-                data-font-color="#000"
-                data-background-color="#fff"
-                data-font-family="verdana"
-                data-weather-params="temp:F,precipitation:mm/hr,wind_speed:mph,humidity:%,cloud_cover:%"
-                data-precipitation-timeline="true"
-                data-allow-users-enter-address="true"
-              ></div>
-            </div>
-          </div>
 
-          <div class="row">
-            <div id="wpConditions" class="col-md">
-              <div class="row">
-                <div id="perciptation" class="col-md">Percepitation 80%</div>
-              </div>
-              <div class="row">
-                <div id="humidty" class="col-md">Humidity 68%</div>
-              </div>
-              <div class="row">
-                <div id="wind" class="col-md">Wind 11mph</div>
-              </div>
-            </div>
+		<!-- Loading main css file -->
+		<link rel="stylesheet" href="style.css">
+		
+		<!--[if lt IE 9]>
+		<script src="js/ie-support/html5.js"></script>
+		<script src="js/ie-support/respond.js"></script>
+		<script src="js/app.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 
-            <div id="wpForecast" class="col-md">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" id="forecastTab">
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#weekly"
-                    >Hourly</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#daily"
-                    >Weekly</a
-                  >
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div class="tab-pane container active" id="daily">
-                  <table id="dailyForecast" width="100%"></table>
-                </div>
-                <div class="tab-pane container fade" id="weekly">
-                  <table id="weeklyForecast" width="100%"></table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div id="wpFooter" class="col text-center">
-              <div class="row">
-                <div class="col">
-                  <a href="https://darksky.net/poweredby/" target="_blank"></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-    <!--  These scripts are for speech to text-->
+		<![endif]-->
+
+
+		 <!--  These scripts are for speech to text-->
     <script src="https://code.responsivevoice.org/responsivevoice.js?key=AavQenOY"></script>
-    <!--  <script> setTimeout(responsiveVoice.speak("Welcome to the Weather App"),1500);</script>-->
-    <div class="container">
-      <h1 class="text-center mt-2">COVID-19 Live Data</h1>
-      <!-- <br><br> -->
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Total Cases</th>
-            <th>Total Deaths</th>
-            <th>Total Recovered</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="data"></tr>
-        </tbody>
-      </table>
-    </div>
-  </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      init();
 
-      function init() {
-        var url = "https://api.covid19api.com/summary";
-        var data = "";
-        $.get(url, function (data) {
-          console.log(data.Global);
-          data = `
-          <td>${data.Global.TotalConfirmed}</td>
-          <td>${data.Global.TotalDeaths}</td>
-          <td>${data.Global.TotalRecovered}</td>
-          `;
+		<script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-          $("#data").html(data);
-        });
-      }
-    });
-  </script>
+
+	<style>
+
+
+.component__weather-box {
+  margin: 30px auto;
+  width: 420px;
+  border: 1px solid #009AD8;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 2px 5px 20px 1px #444;
+}
+
+.component__weather-content {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: #009AD8;
+  height: 120px;
+}
+
+.component__weather-content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.3;
+  background-image: url("https://nunnz.files.wordpress.com/2013/11/4.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 63%;
+  background-size: cover;
+}
+
+.weather-content__overview {
+  width: 50%;
+  text-align: center;
+  display: inline-block;
+  float: left;
+  z-index: 2;
+  position: relative;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 40px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 0.75em;
+}
+
+.weather-content__temp {
+  width: 50%;
+  z-index: 2;
+  text-align: center;
+  float: left;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 0.5em;
+  position: relative;
+  vertical-align: middle;
+}
+
+.weather-content__temp .degrees {
+  line-height: 40px;
+}
+
+.weather-content__temp .wi-degrees {
+  margin-left: -10px;
+  vertical-align: top !important;
+}
+
+.currentTemp .wi {
+  margin-right: 20px;
+  font-size: 40px;
+  vertical-align: baseline;
+}
+
+.component__forecast-box {
+  display: flex;
+  clear: both;
+}
+
+.forecast__item {
+  flex: 1;
+  text-align: center;
+}
+
+.forecast-item__heading {
+  background: #009AD8;
+  border: 1px solid #009AD8;
+  border-left: none;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 800;
+  padding: 10px;
+}
+
+.forecast-item__info {
+  background: #fff;
+  color: #009AD8;
+  padding-bottom: 10px;
+  border-right: 1px solid #009AD8;
+}
+
+.forecast-item__info .wi {
+  display: block;
+  margin: 0 auto;
+  font-size: 24px;
+  padding: 15px 0;
+}
+
+.forecast-item__info .degrees {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.forecast-item__info .degrees .wi-degrees {
+  display: inline;
+}
+
+small {
+  font-size: 12px;
+}
+
+		.page {
+  padding: 15px 0 0;
+}
+
+.bmd-modalButton {
+  display: block;
+  margin: 15px auto;
+  padding: 5px 15px;
+}
+
+.close-button {
+  overflow: hidden;
+}
+
+.bmd-modalContent {
+  box-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.bmd-modalContent .close {
+  font-size: 30px;
+  line-height: 30px;
+  padding: 7px 4px 7px 13px;
+  text-shadow: none;
+  opacity: .7;
+  color:#fff;
+}
+
+.bmd-modalContent .close span {
+  display: block;
+}
+
+.bmd-modalContent .close:hover,
+.bmd-modalContent .close:focus {
+  opacity: 1;
+  outline: none;
+}
+
+.bmd-modalContent iframe {
+  display: block;
+  margin: 0 auto;
+}
+	</style>
+
+	<style>
+		/* toggle in label designing */
+        .toggle {
+            position : relative ;
+            display : inline-block;
+            width : 100px;
+            height : 52px;
+            background-color: white;
+            border-radius: 30px;
+            border: 2px solid gray;
+        }
+
+        /* After slide changes */
+        .toggle:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            top: 1px;
+            left: 1px;
+            transition:  all 0.5s;
+        }
+
+        /* Toggle text */
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        /* Checkbox cheked effect */
+        .checkbox:checked + .toggle::after {
+            left : 49px;
+        }
+
+        /* Checkbox cheked toggle label bg color */
+        .checkbox:checked + .toggle {
+            background-color: #009ad8;
+        }
+
+        /* Checkbox vanished */
+        .checkbox {
+            display : none;
+        }
+	</style>
+
+	</head>
+
+
+	<body onload="initGeolocation();todaydate();">
+		
+		<div class="site-content">
+			<div class="site-header">
+				<div class="container">
+					<a href="index.html" class="branding">
+						<img src="images/logo.png" alt="" class="logo">
+						<div class="logo-type">
+							<h1 class="site-title">Weather App</h1>
+
+						</div>
+					</a>
+
+					<!-- Default snippet for navigation -->
+					<div class="main-navigation">
+						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
+<!--							<li class="menu-item"><a href="news.html">News</a></li>-->
+							<li class="menu-item"><a href="live-cameras.html">Covid-19 Updates</a></li>
+<!--							<li class="menu-item"><a href="photos.html">Photos</a></li>-->
+<!--							<li class="menu-item"><a href="contact.html">Contact</a></li>-->
+							<li class="menu-item"><a onclick="openForm()" data-toggle="modal" data-target="#myModal" class="btn">Rate Us</a></li>
+<!--							<li class="menu-item"><button type="button" class="menu-item" data-toggle="modal" data-bmdSrc="https://docs.google.com/forms/d/e/1FAIpQLSfca3gu2_nVY6EGtC-ww66K3Qow__jja3me_gNleFVHHlHLeA/viewform?embedded=true" width="640" height="2535" frameborder="0" marginheight="0" marginwidth="0" data-bmdWidth="600" data-bmdHeight="450" data-target="#myModal">Rate Us!!</button></li>-->
+						</ul> <!-- .menu -->
+					</div> <!-- .main-navigation -->
+					<!-- Modal -->
+						<div hidden class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+
+							  </div>
+							  <div class="modal-body">
+
+
+
+							   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfca3gu2_nVY6EGtC-ww66K3Qow__jja3me_gNleFVHHlHLeA/viewform?embedded=true" width="640" height="2535" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+								  <button style="alignment: center" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" onclick="closeForm()">Close</span></button>
+
+							  </div>
+
+							</div>
+						  </div>
+						</div>
+
+					<div class="mobile-navigation"></div>
+
+				</div>
+			</div> <!-- .site-header -->
+
+
+			<div class="forecast-table hero" >
+				<div class="hero">
+				<div class= "container" style="border: white; border: 1px">
+					<div  class="find-location">
+						<input type="text" id="inputlocation" placeholder="Please enter a city name....">
+						<input onclick="searchLocation();" style="border-radius: 12px;background-color: #009ad8" class="btn btn-secondary " data-toggle="tooltip" data-placement="top" title="Click here for getting Weather updates on Searched Location " type="submit" value="Find" >
+					</div>
+
+					<br>
+<!--					<br>-->
+					<div class="forecast-table hero" >
+				<div class="container">
+					<div class="forecast-container">
+						<div class="today forecast">
+							<div class="forecast-header">
+								<div class="day" id="day">Monday</div>
+								<div class="date" id="todaydate">6 Oct</div>
+							</div> <!-- .forecast-header -->
+							<div class="forecast-content">
+								<div id="location" class="location">New York</div>
+								<div class="degree">
+									<div class="num"><i id="currenttemp" class="num"></i><sup>o</sup>C</div>
+									<div class="forecast-icon">
+										<img src="" alt="" width=90>
+									</div>
+								</div>
+								<span><img id="humidity" src="images/icon-umberella.png" alt="">90%</span>
+								<span><img src="images/icon-wind.png"><i id="wind_speed"></i>  km/h</span>
+								<span><img src="images/icon-compass.png">East</span>
+								<span><img src="images/icon-wind.png"><span id="weather"></span></span>
+								<br>
+								<br>
+								<div class="row col d-md-inline-block" id="weatherDataUpdate">
+									<button onclick="speech()" type="button" value="Play" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Click here to listen to Wetaher Updates by Voice Narration">
+									  Listen to Weather Update!
+									</button>
+								 </div>
+
+								<br><br>
+<!--									<input type="checkbox" onclick="myFunction()" id="switch" class="checkbox" />-->
+<!--									<label for="switch" class="toggle">-->
+<!--										<br>-->
+<!--										<p>&nbsp;&nbsp;<sup>o</sup>F        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>o</sup>C</p>-->
+<!--									</label>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			</div>
+				</div>
+			</div>
+<!--------------------------------									----------------->
+			<div>
+				<div class="container">
+					<div class="forecast-container" >
+						<div class="today forecast">
+							<div class="forecast-header">
+<!--								<div class="day" id="currday">Monday</div>-->
+<!--								<div class="date" id="currtodaydate">6 Oct</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="currlocation">New York</div>-->
+<!--								<div class="degree">-->
+<!--									<div class="num"><i id="temp" class="num"></i><sup>o</sup>C</div>-->
+<!--									<div class="forecast-icon">-->
+<!--										<img src="images/icons/icon-1.svg" alt="" width=90>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<span><img src="images/icon-umberella.png" alt="">20%</span>-->
+<!--								<span><img src="images/icon-wind.png" alt="">18km/h</span>-->
+<!--								<span><img src="images/icon-compass.png" alt="">East</span>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Tuesday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-3.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+<!--						</div>-->
+
+
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Wednesday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-5.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Thursday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-7.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Friday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-12.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Saturday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-13.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="forecast">-->
+<!--							<div class="forecast-header">-->
+<!--								<div class="day">Sunday</div>-->
+<!--							</div> &lt;!&ndash; .forecast-header &ndash;&gt;-->
+<!--							<div class="forecast-content">-->
+<!--								<div class="forecast-icon">-->
+<!--									<img src="images/icons/icon-14.svg" alt="" width=48>-->
+<!--								</div>-->
+<!--								<div class="degree">23<sup>o</sup>C</div>-->
+<!--								<small>18<sup>o</sup></small>-->
+<!--							</div>-->
+
+								<div class="component__weather-box" style="width: 1000px;">
+							  <div class="component__weather-content">
+								<div class="weather-content__overview"></div>
+								<div class="weather-content__temp"></div>
+							  </div>
+				  				<div class="component__forecast-box"></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+<!------------------------------------------>
+
+
+
+			</div>
+			<main class="main-content">
+				<div class="fullwidth-block">
+					<div class="container">
+						<h2 class="section-title">North America Covid-19 Updates</h2>
+
+							<iframe src="https://ourworldindata.org/grapher/total-cases-covid-19?tab=map&region=NorthAmerica" width="100%" height="600px"></iframe>
+
+					</div>
+				</div>
+			</main> <!-- .main-content -->
+
+			<footer class="site-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8">
+							<form action="#" class="subscribe-form">
+								<input type="text" placeholder="Enter your Feedback here, We're actively trying to improve our site...">
+								<input type="submit" value="Send Feedback">
+							</form>
+						</div>
+
+					</div>
+
+
+				</div>
+			</footer> <!-- .site-footer -->
+		</div>
+		
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/weatherwidget.js"></script>
+
+
+
+<script>
+// jQuery(document).ready(function() {
+//  // executes when HTML-Document is loaded and DOM is ready
+// console.log("document is ready");
+//
+//
+//   jQuery('.btn[href^=#myModal]').click(function(e){
+//     e.preventDefault();
+//     var href = jQuery(this).attr('href');
+//     jQuery(href).modal('toggle');
+//   });
+//
+//
+//
+// });
+function openForm() {
+
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeForm() {
+
+	document.getElementById("myModal").style.display = "none";
+}
+
+</script>
+		
+	</body>
+
 </html>

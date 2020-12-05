@@ -1,2 +1,0 @@
-# WeatherApp - CS-545
- 
