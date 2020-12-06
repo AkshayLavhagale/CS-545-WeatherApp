@@ -7,7 +7,7 @@ const appid = 'e43f64ee98be9268f7a7f49e34aecfdf'; // use your own API KEY plz
 // Use Fetch API to GET data from OpenWeather API
 function getWeatherData(position) {
   const headers = new Headers();
-  const URL = `https://api.openweathermap.org/data/2.5/forecast/daily?${position}&cnt=7&units=metric&APPID=${appid}`;
+  const URL = `https://api.openweathermap.org/data/2.5/forecast/daily?${position}&cnt=7&units=imperial&APPID=${appid}`;
 
   return fetch(URL, {
     method: 'GET',
@@ -79,7 +79,7 @@ renderData = (location, forecast) => {
   const CURRENT_LOCATION = document.getElementsByClassName('weather-content__overview')[0];
   const CURRENT_TEMP = document.getElementsByClassName('weather-content__temp')[0];
   const FORECAST = document.getElementsByClassName('component__forecast-box')[0];
-  CURRENT_TEMP.innerHTML = `<i class="wi"><img src="${iconurl}" alt="" width=90></i> ${Math.round(forecast[0].temp.day)} <sup>o</sup>C<i class="wi wi-degrees"></i>`;
+  CURRENT_TEMP.innerHTML = `<i class="wi"><img src="${iconurl}" alt="" width=90></i> ${Math.round(forecast[0].temp.day)} <sup>o</sup>F<i class="wi wi-degrees"></i>`;
   CURRENT_LOCATION.innerHTML = widgetHeader;
 
 // render each daily forecast
@@ -91,7 +91,7 @@ renderData = (location, forecast) => {
     console.log(day)
     dayBlock.className = 'forecast__item';
     dayBlock.innerHTML = `<div class="forecast-item__heading">${name}</div>
-      <div class="forecast-item__info"><i class="wi"></i> <span class="degrees">${Math.round(day.temp.day)}<i class="wi wi-degrees"><sup>o</sup>C</i></span></div>`;
+      <div class="forecast-item__info"><i class="wi"></i> <span class="degrees">${Math.round(day.temp.day)}<i class="wi wi-degrees"><sup>o</sup>F</i></span></div>`;
     FORECAST.appendChild(dayBlock);
   });
 }

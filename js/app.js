@@ -100,7 +100,7 @@ function fetchLocation(apiKey, latitude, longitude) {
     // var googleApiLink = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
     // console.log(googleApiLink)
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`)
         .then(response => {
             return response.json()
         })
@@ -147,7 +147,7 @@ function fetchLocation(apiKey, latitude, longitude) {
 // // Use Fetch API to GET data from OpenWeather API
 // function getWeatherData(apikey,latitude,longitude) {
 //   const headers = new Headers();
-//   const URL = proxyurl + `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&cnt=7&units=metric&APPID=${apikey}`;
+//   const URL = proxyurl + `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&cnt=7&units=imperial&APPID=${apikey}`;
 //
 //   return fetch(URL, {
 //     method: 'GET',
@@ -256,7 +256,7 @@ function searchLocation() {
     //you don't need a proxy but you need secure your key in the google developer console.
     // var googleApiLink = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
     // console.log(googleApiLink)
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchcity}&units=metric&appid=e43f64ee98be9268f7a7f49e34aecfdf`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchcity}&units=imperial&appid=e43f64ee98be9268f7a7f49e34aecfdf`)
         .then(response => {
             return response.json()
         })
@@ -315,5 +315,5 @@ function fail() {
     alert("Sorry, your browser does not support geolocation services.");
 }
 function speech(){
-    responsiveVoice.speak(`The Temperature today in ${city} is ${temp} degree Celsius, Weather today looks ${weather} and the wind speed is ${windspeed} kilometer per hour, If you plan to go out prepare accordingly and try to avoid visiting public places, since the higher wind speed increases covid transmission risk. Have a Great Day and Stay Safe`);
+    responsiveVoice.speak(`The Temperature today in ${city} is ${temp} degree Fahrenheit , Weather today looks ${weather} and the wind speed is ${windspeed} miles per hour, If you plan to go out prepare accordingly and try to avoid visiting public places, since the higher wind speed increases covid transmission risk. Have a Great Day and Stay Safe`);
 }
